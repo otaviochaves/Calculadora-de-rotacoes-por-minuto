@@ -1,18 +1,32 @@
-function calcularRPM ()
+const resultado = document.getElementById('resultado');
+const button = document.getElementById('btn');
+
+button.addEventListener('click', () =>
 {
-    const velocidadeDeCorte = document.getElementById('velocidadeDeCorte').value
+    const velocidadeDeCorte = parseFloat(document.getElementById('velocidadeDeCorte').value);
     const milDaFormula = 1000;
-    const diametroDaFreasa = document.getElementById('diametroDaFresa').value
+    const diametroDaFresa = parseFloat(document.getElementById('diametroDaFresa').value);
 
-    const rpm = velocidadeDeCorte * milDaFormula / (Math.PI * diametroDaFreasa);
+    if (isNaN(velocidadeDeCorte) || isNaN(diametroDaFresa))
+    {
+        alert('Por favor, insira valores em todos os campos');
+    } else
+    {
+        calcularRPM(velocidadeDeCorte, milDaFormula, diametroDaFresa);
+    }
+});
 
-    document.getElementById('resultado').innerHTML = `As RPM necessárias são: ${rpm.toFixed(0)} RPM`;
+function calcularRPM (velocidadeDeCorte, milDaFormula, diametroDaFresa)
+{
+    const rpm = (velocidadeDeCorte * milDaFormula) / (Math.PI * diametroDaFresa);
+    resultado.innerHTML = `As RPM necessárias são: ${rpm.toFixed(0)} RPM`;
+
     setTimeout(() =>
     {
-        document.getElementById('resultado').innerHTML = ''
-    }, 3000);
+        document.getElementById('resultado').innerHTML = '';
+    }, 2000);
 
-    setTimeout(function ()
+    setTimeout(() =>
     {
         location.reload();
     }, 3000);

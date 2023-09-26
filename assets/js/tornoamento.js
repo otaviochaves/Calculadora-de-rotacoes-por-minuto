@@ -1,18 +1,32 @@
-function calcularRPM ()
+const resultado = document.getElementById('resultado');
+const button = document.getElementById('btn');
+
+button.addEventListener('click', () =>
 {
-    const velocidadeDeCorte = document.getElementById('velocidadeDeCorte').value
+    const velocidadeDeCorte = parseFloat(document.getElementById('velocidadeDeCorte').value);
     const milDaFormula = 1000;
-    const diametroDaPeca = document.getElementById('diametroDaPeca').value
+    const diametroDaPeca = parseFloat(document.getElementById('diametroDaPeca').value);
 
-    const rpm = velocidadeDeCorte * milDaFormula / (Math.PI * diametroDaPeca);
+    if (isNaN(velocidadeDeCorte) || isNaN(diametroDaPeca))
+    {
+        alert('Por favor, insira valores em todos os campos');
+    } else
+    {
+        calcularRPM(velocidadeDeCorte, milDaFormula, diametroDaPeca);
+    }
+});
 
-    document.getElementById('resultado').innerHTML = `As RPM necessárias são: ${rpm.toFixed(0)} RPM`;
+function calcularRPM (velocidadeDeCorte, milDaFormula, diametroDaPeca)
+{
+    const rpm = (velocidadeDeCorte * milDaFormula) / (Math.PI * diametroDaPeca);
+    resultado.innerHTML = `As RPM necessárias são: ${rpm.toFixed(0)} RPM`;
+
     setTimeout(() =>
     {
-        document.getElementById('resultado').innerHTML = ''
+        document.getElementById('resultado').innerHTML = '';
     }, 2000);
 
-    setTimeout(function ()
+    setTimeout(() =>
     {
         location.reload();
     }, 3000);
