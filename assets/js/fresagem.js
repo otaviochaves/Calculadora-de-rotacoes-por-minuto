@@ -1,11 +1,23 @@
 const resultado = document.getElementById('resultado');
 const button = document.getElementById('btn');
+const inputVelocidadeDeCorte = document.getElementById('velocidadeDeCorte');
+const inputDiametroDaFresa = document.getElementById('diametroDaFresa');
+
+
+document.addEventListener('click', (event) =>
+{
+    if (event.target !== inputVelocidadeDeCorte && event.target !== inputDiametroDaFresa)
+    {
+        inputVelocidadeDeCorte.blur();
+        inputDiametroDaFresa.blur();
+    }
+});
 
 button.addEventListener('click', () =>
 {
-    const velocidadeDeCorte = parseFloat(document.getElementById('velocidadeDeCorte').value);
+    const velocidadeDeCorte = parseFloat(inputVelocidadeDeCorte.value);
     const milDaFormula = 1000;
-    const diametroDaFresa = parseFloat(document.getElementById('diametroDaFresa').value);
+    const diametroDaFresa = parseFloat(inputDiametroDaFresa.value);
 
     if (isNaN(velocidadeDeCorte) || isNaN(diametroDaFresa))
     {
@@ -23,7 +35,7 @@ function calcularRPM (velocidadeDeCorte, milDaFormula, diametroDaFresa)
 
     setTimeout(() =>
     {
-        document.getElementById('resultado').innerHTML = '';
+        resultado.innerHTML = '';
     }, 2000);
 
     setTimeout(() =>
